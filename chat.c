@@ -15,6 +15,7 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include "software_information.h"
+#include "chat_server_poll.h"
 
 /// Prints the name, copyright info and version of the program.
 void version(void)
@@ -271,7 +272,7 @@ int main(int argc, char *argv[])
     else if(server_flag && !multithread_flag)
     {
         printf("Chat Server (event loop)\n");
-       // chat_server_event(port);
+        chat_server_event(port);
     }
 
     free(ip);

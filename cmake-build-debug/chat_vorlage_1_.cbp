@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="chat_vorlage_1_"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chat_vorlage_1_">
+				<Option output="/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/chat_vorlage_1_" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 chat_vorlage_1_"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="chat_vorlage_1_/fast">
+				<Option output="/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/chat_vorlage_1_" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 chat_vorlage_1_/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/CMakeLists.txt">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/chat.c">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/chat.h">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/chat_server_poll.c">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/chat_server_poll.h">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.cpp">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.h">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/error_reporting.c">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/error_reporting.h">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/software_information.h">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/tcp_socket.c">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/tcp_socket.h">
+			<Option target="chat_vorlage_1_"/>
+		</Unit>
+		<Unit filename="/home/andi/workspace/BS2_A1_Vorlage/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

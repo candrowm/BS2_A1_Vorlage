@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.cpp
+stdlib.h
+-
+stdio.h
+-
+unistd.h
+-
+fcntl.h
+-
+errno.h
+-
+sys/socket.h
+-
+iostream
+-
+string.h
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+thread
+-
+mutex
+-
+chat_server_threads.h
+/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.h
+
+/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.h
+
