@@ -7,13 +7,11 @@
 #include <sys/ioctl.h>
 #include <sys/poll.h>
 #include <sys/socket.h>
-#include <sys/time.h>
 #include <netinet/in.h>
 #include <errno.h>
 #include "tcp_socket.h"
 #include <unistd.h>
-
-#define SERVER_PORT  12345
+#include <fcntl.h>
 
 #define TRUE             1
 #define FALSE            0
@@ -22,7 +20,8 @@ typedef enum Eventtypes{
     NEW_CONNECTION,
     MSG_RECEIVED,
     MSG_TO_SEND,
-    DISCONNECT
+    DISCONNECT,
+    KEYPRESS
 }e_type;
 
 const char* getEventName(enum Eventtypes eventtype)
@@ -33,12 +32,10 @@ const char* getEventName(enum Eventtypes eventtype)
         case MSG_RECEIVED: return "MSG_RECEIVED";
         case MSG_TO_SEND: return "MSG_TO_SEND";
         case DISCONNECT: return "DISCONNECT";
+        case KEYPRESS: return "KEYPRESS";
         default: return "Unknown!";
     }
 }
-
-// callback: type for event handlers
-typedef void (*callback) (void *);
 
 struct event {
     e_type type;
@@ -47,6 +44,9 @@ struct event {
     char* message;
     ssize_t msglen;
 };
+
+// callback: type for event handlers
+typedef void (*callback) (struct event *);
 
 struct subscription {
     e_type type;
@@ -57,16 +57,13 @@ int subscrCounter = 0;
 
 struct socket_info* listenInfo;
 ssize_t  dataSize = 1;
-int    len, rc = 1;
+int    rc = 1;
 int    end_server = FALSE;
-int    listen_sd = -1, new_sd = -1;
-int    close_conn;
-char   buffer[1024];
-struct sockaddr_in   addr;
+int    listen_sd = -1;
 int    timeout;
 struct pollfd fds[200];
-nfds_t nfds = 1;
-int    current_size = 0, i, j;
+nfds_t nfds = 2;
+int    current_size = 0, j, i;
 
 
 
@@ -142,12 +139,13 @@ void qRemove(struct event** val){
 
 
 
-void writeToConsole(int fromFd, char* msg){
-    struct sockaddr_in address;
+void writeToConsole(char* msg){
+    /*struct sockaddr_in address;
     int addrlen;
     // Get details
     getpeername(fromFd , (struct sockaddr*)&address , (socklen_t*)&addrlen);
-    printf("%s:%d - %s\n", inet_ntoa(address.sin_addr), ntohs(address.sin_port), msg);
+    printf("%s:%d - %s\n", inet_ntoa(address.sin_addr), ntohs(address.sin_port), msg);*/
+    printf("%s\n", msg);
 }
 
 
@@ -155,8 +153,8 @@ void writeToConsole(int fromFd, char* msg){
 /* Event Handlers                                      */
 /*******************************************************/
 void handleConnect(struct event* evp) {
-    printf("handleConnect\n");
-    new_sd = accept_connection(&listenInfo);
+    //printf("handleConnect\n");
+    int new_sd = accept_connection(&listenInfo);
 
     if (new_sd < 0) {
         if (errno != EWOULDBLOCK) {
@@ -173,15 +171,29 @@ void handleConnect(struct event* evp) {
     /* Add the new incoming connection to the            */
     /* pollfd structure                                  */
     /*****************************************************/
-    printf("  New incoming connection - %d\n", new_sd);
     fds[nfds].fd = new_sd;
     fds[nfds].events = POLLIN;
     nfds++;
+
+    char* msg = malloc(1024*sizeof(char));
+    sprintf(msg, "FD %d has entered the chat room.\n", new_sd);
+    printf("%s", msg);
+
+    for(int j=0; j<nfds; j++){
+        int fd = fds[j].fd;
+        if(fd != new_sd && fd != listen_sd && fd != 0){
+            char* mymsg = malloc(1024*sizeof(char));
+            strcpy(mymsg, msg);
+            qInsert(createEvent(MSG_TO_SEND, fd, mymsg, strlen(mymsg)));
+        }
+    }
 
     /*****************************************************/
     /* Check if there are more new connections           */
     /*****************************************************/
     qInsert(createEvent(NEW_CONNECTION, listen_sd, "", 0));
+
+    destroyEvent(evp);
 }
 
 
@@ -190,9 +202,13 @@ void handleReceive(struct event* evp){
     /* Receive all incoming data on this socket            */
     /* before we loop back and call poll again.            */
     /*******************************************************/
-    close_conn = FALSE;
+    int close_conn = FALSE;
+    char buffer[1024];
     do
     {
+        // Clear buffer
+        memset(&buffer[0],0,sizeof(buffer));
+
         /*****************************************************/
         /* Receive data on this connection until the         */
         /* recv fails with EWOULDBLOCK. If any other        */
@@ -204,7 +220,7 @@ void handleReceive(struct event* evp){
         {
             if (errno != EWOULDBLOCK)
             {
-                perror("  recv() failed");
+                //perror("  recv() failed");
                 close_conn = TRUE;
             }
             break;
@@ -224,19 +240,30 @@ void handleReceive(struct event* evp){
         /*****************************************************/
         /* Data was received                                 */
         /*****************************************************/
-        printf("  %d bytes received\n", len);
+        struct sockaddr_in address;
+        int addrlen;
+        // Get details
+        getpeername(evp->fd , (struct sockaddr*)&address , (socklen_t*)&addrlen);
+
+        char* msg = malloc(1024*sizeof(char));
+        sprintf(msg, "%s:%d:%d - %s\n", inet_ntoa(address.sin_addr), ntohs(address.sin_port), evp->fd, buffer);
 
         /*****************************************************/
         /* Write message to terminal                         */
         /*****************************************************/
-        writeToConsole(evp->fd, buffer);
+        //writeToConsole(evp->fd, buffer);
+        writeToConsole(msg);
 
         /*****************************************************/
         /* Create Write Event                                */
         /*****************************************************/
         for(int j=0; j<nfds; j++){
-            if(fds[j].fd != evp->fd){
-                qInsert(createEvent(MSG_TO_SEND, fds[j].fd, buffer, dataSize));
+            int fd = fds[j].fd;
+            if(fd != evp->fd && fd != listen_sd && fd != 0){
+                //printf("Adding to queue for fd %d", fd);
+                char* mymsg = malloc(1024*sizeof(char));
+                strcpy(mymsg, msg);
+                qInsert(createEvent(MSG_TO_SEND, fd, mymsg, strlen(mymsg)));
             }
         }
     } while(TRUE);
@@ -250,6 +277,7 @@ void handleReceive(struct event* evp){
     if (close_conn){
         qInsert(createEvent(DISCONNECT, evp->fd, "", 0));
     }
+    destroyEvent(evp);
 }
 
 
@@ -259,12 +287,28 @@ void handleSend(struct event* evp){
     {
         perror("  send() failed");
         qInsert(createEvent(DISCONNECT, evp->fd, "", 0));
+        free(evp->message);
     }
+    destroyEvent(evp);
 }
 
 
 void handleDisconnect(struct event* evp){
     close(evp->fd);
+
+    char* msg = malloc(1024*sizeof(char));
+    sprintf(msg, "FD %d has left the chat room.\n", evp->fd);
+    printf("%s", msg);
+
+    for(int j=0; j<nfds; j++){
+        int fd = fds[j].fd;
+        if(fd != evp->fd && fd != listen_sd && fd != 0){
+            char* mymsg = malloc(1024*sizeof(char));
+            strcpy(mymsg, msg);
+            qInsert(createEvent(MSG_TO_SEND, fd, mymsg, strlen(mymsg)));
+        }
+    }
+
     for(int i=0; i<nfds; i++){
         if(evp->fd == fds[i].fd){
             fds[i].fd = -1;
@@ -277,10 +321,27 @@ void handleDisconnect(struct event* evp){
             break;
         }
     }
+
+    destroyEvent(evp);
 }
 
 
+void handleKeypress(struct event* evp){
+    char* c = malloc(1024*sizeof(char));
+    read (0, c, 1024);
 
+    for(int j=0; j<nfds; j++){
+        int fd = fds[j].fd;
+        if(fd != 0 && fd != listen_sd){
+            char* mymsg = malloc(1024*sizeof(char));
+            strcpy(mymsg, "Server: ");
+            strcat(mymsg, c);
+            qInsert(createEvent(MSG_TO_SEND, fd, mymsg, strlen(mymsg)));
+        }
+    }
+
+    destroyEvent(evp);
+}
 
 
 
@@ -299,27 +360,32 @@ void chat_server_event(int port)
     memset(fds, 0 , sizeof(fds));
 
     /*************************************************************/
-    /* Set up listening socket                                  */
+    /* Set up listening socket and terminal fd                   */
     /*************************************************************/
-    fds[0].fd = listen_sd;
+    fds[0].fd = 0;
     fds[0].events = POLLIN;
+    fcntl (0, F_SETFL, O_NONBLOCK);
+
+    fds[1].fd = listen_sd;
+    fds[1].events = POLLIN;
     timeout = 0; // Now 0, because we want the event queue to be processed even if poll is not ready and we're not multithreading.... (10 * 60 * 1000);
 
     /*************************************************************/
     /* Register Event Handlers                                  */
     /*************************************************************/
-    printf("Adding subscriptions\n");
+    //printf("Adding subscriptions\n");
     subscribe(NEW_CONNECTION, handleConnect);
     subscribe(MSG_RECEIVED, handleReceive);
     subscribe(MSG_TO_SEND, handleSend);
     subscribe(DISCONNECT, handleDisconnect);
+    subscribe(KEYPRESS, handleKeypress);
 
     /*************************************************************/
     /* Event Loop   */
     /*************************************************************/
     do
     {
-        printf("Polling...\n");
+        //printf("Polling...\n");
         rc = poll(fds, nfds, timeout);
 
         if (rc < 0) {
@@ -328,47 +394,51 @@ void chat_server_event(int port)
         }
         if (rc == 0)
         {
-            printf("  poll() timed out\n");
-            //break;
+            /* Poll time out (0 s) - nothing to read */
+            //printf("  poll() timed out\n");
+        }else{
+            /***********************************************************/
+            /* Find and handle the active FDs                           */
+            /***********************************************************/
+            current_size = nfds;
+            for (i = 0; i < current_size; i++)
+            {
+                if(fds[i].revents == 0){
+                    //printf("FD not active\n");
+                    continue;
+                }
+
+
+                /*********************************************************/
+                /* If revents is not POLLIN, it's an unexpected result,  */
+                /* log and end the server.                               */
+                /*********************************************************/
+                if(fds[i].revents != POLLIN){
+                    printf("  Error! revents = %d\n", fds[i].revents);
+                    end_server = TRUE;
+                    break;
+
+                }
+                if (fds[i].fd == listen_sd){
+                    //printf("  Listening socket is readable\n");
+                    qInsert(createEvent(NEW_CONNECTION, listen_sd, "", 0));
+                }
+                else if(fds[i].fd == 0){
+                    // Writing on terminal
+                    qInsert(createEvent(KEYPRESS, 0, "", 0));
+                }
+                else{
+                    //printf("  Descriptor %d is readable\n", fds[i].fd);
+                    qInsert(createEvent(MSG_RECEIVED, fds[i].fd,"", 0));
+                }  /* End of existing connection is readable             */
+            } /* End of loop through pollable descriptors              */
+
         }
-
-        /***********************************************************/
-        /* Find and handle the active FDs                           */
-        /***********************************************************/
-        current_size = nfds;
-        for (i = 0; i < current_size; i++)
-        {
-            if(fds[i].revents == 0){
-                printf("FD not active\n");
-                continue;
-            }
-
-
-            /*********************************************************/
-            /* If revents is not POLLIN, it's an unexpected result,  */
-            /* log and end the server.                               */
-            /*********************************************************/
-            if(fds[i].revents != POLLIN){
-                printf("  Error! revents = %d\n", fds[i].revents);
-                end_server = TRUE;
-                break;
-
-            }
-            if (fds[i].fd == listen_sd){
-                printf("  Listening socket is readable\n");
-                qInsert(createEvent(NEW_CONNECTION, listen_sd, "", 0));
-            }
-            else{
-                printf("  Descriptor %d is readable\n", fds[i].fd);
-                qInsert(createEvent(MSG_RECEIVED, fds[i].fd,"", 0));
-            }  /* End of existing connection is readable             */
-        } /* End of loop through pollable descriptors              */
-
 
 
         /*********************************************************/
         /* Event Handling in same Thread:                        */
-        /* But only run through the even queue once because
+        /* But only run through the event queue once because
          * we will create blocking behavior if we keep looping
          * when we always create a new write event if we cant write
         /*********************************************************/
@@ -376,12 +446,12 @@ void chat_server_event(int port)
             struct event* event;
             qRemove(&event);
             if(event != NULL){
-                printf("Handling event %s - overall %d subscriptions\n", getEventName(event->type), subscrCounter);
+                //printf("Handling event %s - overall %d subscriptions\n", getEventName(event->type), subscrCounter);
                 for(int j=0; j<subscrCounter; j++){
                     if(subscriptions[j]->type == event->type){
-                        printf("Found subscription\n");
+                        //printf("Found subscription\n");
                         subscriptions[j]->cb(event);
-                        printf("Subscription handled\n");
+                        //printf("Subscription handled\n");
                     }
                 }
             }

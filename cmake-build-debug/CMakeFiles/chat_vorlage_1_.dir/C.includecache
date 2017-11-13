@@ -43,8 +43,6 @@ sys/poll.h
 -
 sys/socket.h
 -
-sys/time.h
--
 netinet/in.h
 -
 errno.h
@@ -52,6 +50,8 @@ errno.h
 tcp_socket.h
 /home/andi/workspace/BS2_A1_Vorlage/tcp_socket.h
 unistd.h
+-
+fcntl.h
 -
 
 /home/andi/workspace/BS2_A1_Vorlage/chat_server_poll.h

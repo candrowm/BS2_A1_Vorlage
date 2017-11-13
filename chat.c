@@ -177,7 +177,7 @@ int main(int argc, char *argv[])
         {
             {"server", required_argument, NULL, 's'},
             {"client", required_argument, NULL, 'c'},
-            {"thread", no_argument, NULL, 't'},
+            {"thread", optional_argument, NULL, 't'},
             {"event", no_argument, NULL, 'e'},
             {"help", no_argument, NULL, 'h'},
             {"version", no_argument, NULL, 'v'}
