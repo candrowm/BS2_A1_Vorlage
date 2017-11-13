@@ -5,10 +5,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/andi/workspace/BS2_A1_Vorlage/chat.c" "/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/chat.c.o"
-  "/home/andi/workspace/BS2_A1_Vorlage/chat_server_poll.c" "/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/chat_server_poll.c.o"
-  "/home/andi/workspace/BS2_A1_Vorlage/error_reporting.c" "/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/error_reporting.c.o"
-  "/home/andi/workspace/BS2_A1_Vorlage/tcp_socket.c" "/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/tcp_socket.c.o"
+  "/home/martin/Downloads/chat_vorlage_thread/chat.c" "/home/martin/Downloads/chat_vorlage_thread/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/chat.c.o"
+  "/home/martin/Downloads/chat_vorlage_thread/chat_server_poll.c" "/home/martin/Downloads/chat_vorlage_thread/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/chat_server_poll.c.o"
+  "/home/martin/Downloads/chat_vorlage_thread/error_reporting.c" "/home/martin/Downloads/chat_vorlage_thread/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/error_reporting.c.o"
+  "/home/martin/Downloads/chat_vorlage_thread/tcp_socket.c" "/home/martin/Downloads/chat_vorlage_thread/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/tcp_socket.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
@@ -16,7 +16,7 @@ set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_TARGET_INCLUDE_PATH
   )
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.cpp" "/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/chat_server_threads.cpp.o"
+  "/home/martin/Downloads/chat_vorlage_thread/chat_server_threads.cpp" "/home/martin/Downloads/chat_vorlage_thread/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir/chat_server_threads.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

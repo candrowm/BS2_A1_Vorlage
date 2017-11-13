@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/andi/workspace/BS2_A1_Vorlage/chat.c
+/home/martin/Downloads/chat_vorlage_thread/chat.c
 chat.h
-/home/andi/workspace/BS2_A1_Vorlage/chat.h
+/home/martin/Downloads/chat_vorlage_thread/chat.h
 chat_server_threads.h
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.h
+/home/martin/Downloads/chat_vorlage_thread/chat_server_threads.h
 stdio.h
 -
 stdlib.h
@@ -24,13 +24,13 @@ string.h
 arpa/inet.h
 -
 software_information.h
-/home/andi/workspace/BS2_A1_Vorlage/software_information.h
+/home/martin/Downloads/chat_vorlage_thread/software_information.h
 chat_server_poll.h
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_poll.h
+/home/martin/Downloads/chat_vorlage_thread/chat_server_poll.h
 
-/home/andi/workspace/BS2_A1_Vorlage/chat.h
+/home/martin/Downloads/chat_vorlage_thread/chat.h
 
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_poll.c
+/home/martin/Downloads/chat_vorlage_thread/chat_server_poll.c
 stdio.h
 -
 string.h
@@ -48,19 +48,19 @@ netinet/in.h
 errno.h
 -
 tcp_socket.h
-/home/andi/workspace/BS2_A1_Vorlage/tcp_socket.h
+/home/martin/Downloads/chat_vorlage_thread/tcp_socket.h
 unistd.h
 -
 fcntl.h
 -
 
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_poll.h
+/home/martin/Downloads/chat_vorlage_thread/chat_server_poll.h
 
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.h
+/home/martin/Downloads/chat_vorlage_thread/chat_server_threads.h
 
-/home/andi/workspace/BS2_A1_Vorlage/error_reporting.c
+/home/martin/Downloads/chat_vorlage_thread/error_reporting.c
 error_reporting.h
-/home/andi/workspace/BS2_A1_Vorlage/error_reporting.h
+/home/martin/Downloads/chat_vorlage_thread/error_reporting.h
 stdio.h
 -
 errno.h
@@ -72,13 +72,13 @@ pthread.h
 stdarg.h
 -
 
-/home/andi/workspace/BS2_A1_Vorlage/error_reporting.h
+/home/martin/Downloads/chat_vorlage_thread/error_reporting.h
 
-/home/andi/workspace/BS2_A1_Vorlage/software_information.h
+/home/martin/Downloads/chat_vorlage_thread/software_information.h
 
-/home/andi/workspace/BS2_A1_Vorlage/tcp_socket.c
+/home/martin/Downloads/chat_vorlage_thread/tcp_socket.c
 tcp_socket.h
-/home/andi/workspace/BS2_A1_Vorlage/tcp_socket.h
+/home/martin/Downloads/chat_vorlage_thread/tcp_socket.h
 stdlib.h
 -
 stdio.h
@@ -92,7 +92,7 @@ errno.h
 sys/socket.h
 -
 
-/home/andi/workspace/BS2_A1_Vorlage/tcp_socket.h
+/home/martin/Downloads/chat_vorlage_thread/tcp_socket.h
 arpa/inet.h
 -
 

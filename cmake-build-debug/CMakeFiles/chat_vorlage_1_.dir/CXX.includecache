@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.cpp
+/home/martin/Downloads/chat_vorlage_thread/chat_server_threads.cpp
 stdlib.h
 -
 stdio.h
@@ -34,7 +34,7 @@ thread
 mutex
 -
 chat_server_threads.h
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.h
+/home/martin/Downloads/chat_vorlage_thread/chat_server_threads.h
 
-/home/andi/workspace/BS2_A1_Vorlage/chat_server_threads.h
+/home/martin/Downloads/chat_vorlage_thread/chat_server_threads.h
 

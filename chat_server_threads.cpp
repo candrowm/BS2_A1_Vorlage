@@ -21,12 +21,11 @@ int port;
 #include "chat_server_threads.h"
 
 
-//int threadFileDescriptors[MAXTHREADS] = {};
-//pthread_cond_t threadConditions[MAXTHREADS] = {};
-//pthread_mutex_t threadMutexes[MAXTHREADS] = {};
-int* threadFileDescriptors;
-pthread_cond_t* threadConditions;
-pthread_mutex_t* threadMutexes;
+int threadFileDescriptors[MAXTHREADS] = {};
+pthread_cond_t threadConditions[MAXTHREADS] = {};
+pthread_mutex_t threadMutexes[MAXTHREADS] = {};
+
+
 
 
 
@@ -277,10 +276,8 @@ void *serverChatThread(void *ptr) {
 extern "C" void chat_server_threads(int numberOfThreads, int serverPort) {
     port=serverPort;
 
-
-   threadFileDescriptors=new int[numberOfThreads];
-    threadConditions=new pthread_cond_t[numberOfThreads];
-    threadMutexes = new pthread_mutex_t[numberOfThreads];
+    //threadConditions=new pthread_cond_t[numberOfThreads];
+    //threadMutexes = new pthread_mutex_t[numberOfThreads];
 
     pthread_t serverSocketThread;
     int errorServerSocketThread = pthread_create(&serverSocketThread, NULL, masterSocketThread, NULL);
