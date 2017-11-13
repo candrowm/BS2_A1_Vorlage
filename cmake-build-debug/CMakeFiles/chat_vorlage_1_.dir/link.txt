@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11 -pthread -g  -rdynamic CMakeFiles/chat_vorlage_1_.dir/chat_server_threads.cpp.o CMakeFiles/chat_vorlage_1_.dir/chat_server_poll.c.o CMakeFiles/chat_vorlage_1_.dir/chat.c.o CMakeFiles/chat_vorlage_1_.dir/error_reporting.c.o CMakeFiles/chat_vorlage_1_.dir/tcp_socket.c.o  -o chat_vorlage_1_ 

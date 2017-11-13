@@ -1,0 +1,3 @@
+/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/andi/workspace/BS2_A1_Vorlage/cmake-build-debug/CMakeFiles/chat_vorlage_1_.dir
